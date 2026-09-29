@@ -1,0 +1,10 @@
+artifacts/
+!artifacts/.gitkeep
+__pycache__/
+.venv/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.hypothesis/
+.numba_cache/

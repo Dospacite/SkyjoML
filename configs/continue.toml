@@ -1,0 +1,53 @@
+# Continuation of the best fine-tuning seed to 14M decisions; other seeds' final policies join the league.
+# Main training configuration (CPU-only reference machine: 4 vCPU, 8 GB RAM; one process per seed).
+run_name = "cont"
+total_decisions = 14_000_000
+n_envs = 256
+decisions_per_update = 32_768
+epochs = 4
+minibatch = 2048
+lr = 1.0e-4
+lr_final = 1.0e-5
+clip = 0.2
+gae_lambda = 0.95
+gamma = 1.0
+ent_coef = 0.005
+ent_coef_final = 0.002
+vf_coef = 0.5
+max_grad_norm = 0.5
+target_kl = 0.03
+shaping_start = 0.0
+shaping_anneal_decisions = 0
+shaping_scale = 20.0
+p_selfplay_table = 0.3
+p_two_learner_seats = 0.2
+opp_recent = 0.5
+opp_old = 0.25
+opp_heuristic = 0.25
+heuristics = ["finish", "column", "greedy"]
+heuristic_weights = [0.6, 0.3, 0.1]
+snapshot_every = 10
+n_recent = 3
+eval_every = 10
+eval_seeds = 150
+eval_players = [4]
+checkpoint_every = 5
+out_dir = "artifacts/runs"
+torch_threads = 1
+extra_snapshots = ["artifacts/runs/ft_s1/final.pt", "artifacts/runs/ft_s2/final.pt"]
+value_warmup_updates = 0
+
+[player_count_weights]
+2 = 0.15
+3 = 0.15
+4 = 0.25
+5 = 0.12
+6 = 0.12
+7 = 0.10
+8 = 0.11
+
+[net]
+player_dim = 48
+ctx_dim = 192
+slot_hidden = 96
+attention = false

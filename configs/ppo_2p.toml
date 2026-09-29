@@ -1,0 +1,47 @@
+# Two-player PPO from the distilled warm start (artifacts/distill/distill_2p.pt). Pure terminal win-credit reward.
+# Fixed opponents: the legacy multi-player release ("legacy") and tuned heuristics; dev evaluation is head-to-head
+# against the legacy model (parity = 1.0 credit x n).
+run_name = "ppo2p"
+total_decisions = 8_000_000
+n_envs = 256
+decisions_per_update = 32_768
+epochs = 4
+minibatch = 2048
+lr = 1.0e-4
+lr_final = 1.0e-5
+clip = 0.2
+gae_lambda = 0.95
+gamma = 1.0
+ent_coef = 0.005
+ent_coef_final = 0.002
+vf_coef = 0.5
+max_grad_norm = 0.5
+target_kl = 0.03
+shaping_start = 0.0
+shaping_anneal_decisions = 0
+p_selfplay_table = 0.3
+opp_recent = 0.5
+opp_old = 0.25
+opp_heuristic = 0.25
+heuristics = ["legacy", "finish_tuned", "finish"]
+heuristic_weights = [0.6, 0.3, 0.1]
+snapshot_every = 10
+n_recent = 3
+eval_every = 10
+eval_seeds = 400
+eval_players = [2]
+eval_opponent = "legacy"
+checkpoint_every = 5
+out_dir = "artifacts/runs"
+torch_threads = 1
+init_from = "artifacts/distill/distill_2p.pt"
+value_warmup_updates = 2
+
+[player_count_weights]
+2 = 1.0
+
+[net]
+player_dim = 48
+ctx_dim = 192
+slot_hidden = 96
+attention = false

@@ -1,0 +1,10 @@
+run_name = "smoke"
+total_decisions = 60_000
+n_envs = 128
+decisions_per_update = 8192
+minibatch = 2048
+eval_every = 3
+eval_seeds = 20
+snapshot_every = 2
+checkpoint_every = 3
+out_dir = "artifacts/runs"
